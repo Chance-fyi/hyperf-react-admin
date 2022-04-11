@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   api:
-    image: data-export-api
+    image: hyperf-react-admin-api
     build: ./api
     container_name: api
     ports:
@@ -26,3 +26,17 @@ services:
       - |
         yarn
         yarn start
+  mysql:
+    image: mysql:8.0-oracle
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "admin"
+      TZ: Asia/Shanghai
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
