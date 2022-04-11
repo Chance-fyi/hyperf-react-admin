@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  api:
+    image: data-export-api
+    build: ./api
+    container_name: api
+    ports:
+      - "9501:9501"
+    volumes:
+      - ./api:/home
+    working_dir: /home
+    restart: always
+    command: php bin/hyperf.php start
