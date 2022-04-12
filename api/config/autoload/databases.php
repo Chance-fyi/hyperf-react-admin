@@ -9,6 +9,9 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
+use Hyperf\Database\Commands\ModelOption;
+
 return [
     'default' => [
         'driver' => env('DB_DRIVER', 'mysql'),
@@ -33,6 +36,11 @@ return [
                 'path' => 'app/Model',
                 'force_casts' => true,
                 'inheritance' => 'Model',
+                'uses' => '',
+                'ignore_tables' => ['tb_migrations'],
+                'table_mapping' => [],
+                'with_comments' => true,
+                'property_case' => ModelOption::PROPERTY_CAMEL_CASE,
             ],
         ],
     ],
