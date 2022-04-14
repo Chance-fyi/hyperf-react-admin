@@ -6,7 +6,7 @@
 
 namespace App\Exception;
 
-use App\Constants\CodeEnum;
+use App\Constants\code\CodeEnum;
 use Hyperf\Server\Exception\ServerException;
 use Throwable;
 

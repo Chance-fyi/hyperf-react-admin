@@ -8,7 +8,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Constants\CodeEnum;
+use App\Constants\code\AuthCodeEnum;
+use App\Constants\code\CodeEnum;
 use App\Request\login\LoginRequest;
 use App\Service\LoginService;
 use Hyperf\Di\Annotation\Inject;
@@ -33,14 +34,30 @@ class LoginController extends AbstractController
 
         $token =  $this->auth->login($user);
 
-        return $this->response(CodeEnum::LOGIN_SUCCESSFUL,[
+        return $this->response(AuthCodeEnum::LOGIN_SUCCESS,[
             "token" => $token
         ]);
     }
 
     #[GetMapping(path: "/login/refreshToken")]
-    public function refreshToken()
+    public function refreshToken(): array
     {
-        return $this->auth->refresh();
+        $token = $this->auth->refresh();
+
+        if (!$token){
+            return $this->response(AuthCodeEnum::TOKEN_DOES_NOT_EXIST);
+        }
+
+        return $this->response(CodeEnum::SUCCESS,[
+            "token" => $token
+        ]);
+    }
+
+    #[GetMapping(path: "/logout")]
+    #[Middleware(AuthMiddleware::class)]
+    public function logout(): array
+    {
+        $this->auth->logout();
+        return $this->response(CodeEnum::SUCCESS);
     }
 }
