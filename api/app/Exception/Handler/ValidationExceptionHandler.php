@@ -25,7 +25,7 @@ class ValidationExceptionHandler extends ExceptionHandler
             "msg" => $throwable->validator->errors()->first()
         ]);
         return $response->withAddedHeader('content-type', 'application/json; charset=utf-8')
-            ->withStatus($throwable->status)
+            ->withStatus(200)
             ->withBody(new SwooleStream($data));
     }
 

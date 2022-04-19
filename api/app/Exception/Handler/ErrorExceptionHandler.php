@@ -25,7 +25,7 @@ class ErrorExceptionHandler extends ExceptionHandler
             "msg" => $throwable->getMessage(),
         ]);
         return $response->withAddedHeader('content-type', 'application/json; charset=utf-8')
-            ->withStatus(400)
+            ->withStatus(200)
             ->withBody(new SwooleStream($data));
     }
 

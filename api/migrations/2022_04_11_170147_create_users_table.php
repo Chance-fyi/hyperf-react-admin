@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username',30)->unique()->comment('用户名');
             $table->string('password',255)->comment('密码');
+            $table->string('avatar',255)->comment('头像');
             $table->timestamps();
         });
     }

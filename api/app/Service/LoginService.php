@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Constants\code\AuthCodeEnum;
+use App\Constants\code\CodeEnum;
 use App\Exception\ErrorException;
 use App\Model\User;
 
@@ -20,11 +20,11 @@ class LoginService
         $user = User::query()->where('username',$data['username'])->first();
 
         if (!$user){
-            throw new ErrorException(AuthCodeEnum::AUTH_LOGIN_FAILED);
+            throw new ErrorException(CodeEnum::AUTH_LOGIN_FAILED);
         }
 
         if (!password_verify($data['password'],$user->password)){
-            throw new ErrorException(AuthCodeEnum::AUTH_LOGIN_FAILED);
+            throw new ErrorException(CodeEnum::AUTH_LOGIN_FAILED);
         }
 
         return $user;
